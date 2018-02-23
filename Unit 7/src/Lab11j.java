@@ -10,6 +10,8 @@ public class Lab11j
 {
    public static void main(String args[])
    {
-
+	   Triples triple1 = new Triples(110);
+	   out.print(triple1);
+	   
 	}
 }
