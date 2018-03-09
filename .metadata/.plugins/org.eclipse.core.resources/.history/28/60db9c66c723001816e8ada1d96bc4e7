@@ -1,0 +1,28 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+
+public class Runner
+{
+	private ArrayList<Integer> count;
+	private static ArrayList<Character> letters;
+
+	public static void main( String args[] ) throws IOException
+	{
+		Scanner file = new Scanner(new File("lab16e1.dat"));
+			while (file.hasNext()){
+				System.out.println(file.next());
+			}
+
+		//more test cases
+	}
+
+}
