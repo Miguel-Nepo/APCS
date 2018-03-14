@@ -1,0 +1,59 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
+import java.util.Arrays;
+import java.util.Scanner;
+import static java.lang.System.*;
+import static java.util.Arrays.*;
+
+public class GradeBookRunner
+{
+   public static void main( String args[] )
+   {
+		out.println("Welcome to the Class Stats program!");
+		
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("What is the name of this class? ");
+		String name = keyboard.nextLine();
+		
+		System.out.println("How many students are in this class? ");
+		int classSize = keyboard.nextInt();
+		
+		
+		Class test = new Class(name,classSize);
+		
+		for (int i = 0;i<classSize;i++){
+			System.out.println("Enter the name of student "+(i+1));
+			keyboard.nextLine();
+			String stuName = keyboard.nextLine();
+			
+			System.out.println("Enter the grades of "+stuName);
+			System.out.println("Use the format x - grades ( 2 - 100 100) : ");
+			keyboard.nextLine();
+			String stuGrades = keyboard.nextLine();
+			System.out.println(stuGrades);
+			
+			test.addStudent(i,new Student(stuName,stuGrades));
+		}
+		out.println(test);
+		
+		out.println(String.format(test.getStudentName(0) + "\'s average = %.2f",test.getStudentAverage(0)));	
+		out.println(String.format(test.getStudentName(1) + "\'s average = %.2f",test.getStudentAverage(1)));	
+		out.println(String.format(test.getStudentName(2) + "\'s average %.2f",test.getStudentAverage(2)));	
+		
+		out.println(String.format("Sandy" + "\'s average %.2f",test.getStudentAverage("Sandy")));	
+
+		out.println("Failure List = " + test.getFailureList(70));	
+		out.println("Highest Average = " + test.getStudentWithHighestAverage());
+		out.println("Lowest Average = " + test.getStudentWithLowestAverage());
+								
+		out.println(String.format("Class Average = %.2f",test.getClassAverage()));	
+
+
+
+
+	}		
+}
