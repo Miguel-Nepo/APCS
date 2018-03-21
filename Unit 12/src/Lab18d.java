@@ -19,15 +19,15 @@ public class Lab18d
 
 		int size = file.nextInt();
 		file.nextLine();
-		ArrayList<Word> m = new ArrayList<Word>();
+		ArrayList<Word2> m = new ArrayList<Word2>();
 		while (file.hasNextLine()){
-			m.add(new Word(file.nextLine()));
+			m.add(new Word2(file.nextLine()));
 		}
 		System.out.println(m);
 		for (int i = 0;i<m.size();i++){
 			for (int j = 0;j<m.size()-1;j++){
 				if (m.get(j).compareTo(m.get(j+1))==1){
-					Word temp = m.get(j+1);
+					Word2 temp = m.get(j+1);
 					m.set(j+1, m.get(j));
 					m.set(j, temp);
 				}
