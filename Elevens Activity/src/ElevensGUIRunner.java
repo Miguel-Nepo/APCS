@@ -9,6 +9,7 @@ public class ElevensGUIRunner {
 	 * @param args is not used.
 	 */
 	public static void main(String[] args) {
+		System.out.println("Miguel Nepomuceno \nPeriod 2 \nMarch 23, 2018\n07");
 		Board board = new ElevensBoard();
 		CardGameGUI gui = new CardGameGUI(board);
 		gui.displayGame();

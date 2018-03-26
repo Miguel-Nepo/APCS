@@ -1,0 +1,49 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class - 
+//Lab  -
+
+import java.util.Scanner;
+import static java.lang.System.*;
+import java.util.ArrayList;
+
+public class FancyWord
+{
+	private char[][] mat;
+	private ArrayList<Character> stringChar = new ArrayList<Character>();
+
+	public FancyWord()
+	{
+		mat = new char[0][0];
+	}
+
+   public FancyWord(String s)
+	{
+	   for (int i = 0;i<s.length();i++){
+		   stringChar.add(s.charAt(i));
+	   }
+	   mat = new char[stringChar.size()][stringChar.size()];
+
+		for (int i = 0; i<stringChar.size();i++){
+			mat[0][i] = stringChar.get(i);
+			mat[stringChar.size()-1][i] = stringChar.get(i);
+			mat[stringChar.size()-1][stringChar.size()-1-i] = stringChar.get(i);
+			mat[i][i] = stringChar.get(i);
+		}
+	}
+
+	public String toString()
+	{
+		String output="";
+		for (int r = 0;r<mat.length;r++){
+			for (int c = 0;c<mat[r].length;c++){
+				output += mat[r][c] + " ";
+			}
+			output += "\n";
+			
+		}
+
+		return output+"\n\n";
+	}
+}
