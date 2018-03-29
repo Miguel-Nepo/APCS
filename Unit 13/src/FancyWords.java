@@ -15,23 +15,47 @@ public class FancyWords
 
 	public FancyWords(String sentence)
 	{
-
+		setWords(sentence);
 	}
 
 	public void setWords(String sentence)
 	{
-
+		Scanner s = new Scanner(sentence);
+		int counter = 0;
+		while (s.hasNext()){
+			counter++;
+			s.next();
+		}
+		wordRay = new String[counter];
+		s = new Scanner(sentence);
+		int i = 0;
+		while (s.hasNext()){
+			wordRay[i] = s.next();
+			i++;;
+		}
 	}
 
 	public String toString()
 	{
 		String output="";
 		int max = Integer.MIN_VALUE;
-
-
-
-
-
+		for (int i = 0; i<wordRay.length;i++){
+			if (wordRay[i].length()>max){
+				max = wordRay[i].length();
+			}
+		}
+		
+		for (int i = 0;i<max;i++){
+			for (int j = wordRay.length-1;j>=0;j--){
+				if (wordRay[j].length()>i){
+					output += wordRay[j].charAt(wordRay[j].length()-1-i);
+				}
+				else{
+					output += " ";
+				}
+			}
+			output += "\n";
+		}
 
 		return output+"\n\n";
 	}
