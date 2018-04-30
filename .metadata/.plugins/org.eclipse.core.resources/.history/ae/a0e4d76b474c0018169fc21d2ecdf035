@@ -18,7 +18,7 @@ public class Bullets
 
 	public Bullets()
 	{
-		ammo=new ArrayList <Ammo> ();
+		ammo = new ArrayList<Ammo>();
 	}
 
 	public void add(Ammo al)
@@ -29,23 +29,23 @@ public class Bullets
 	//post - draw each Ammo
 	public void drawEmAll( Graphics window )
 	{
-		for(int i = 0; i<ammo.size(); i++)
-		{
+		for (int i = 0; i<ammo.size();i++){
 			ammo.get(i).draw(window);
 		}
 	}
 
 	public void moveEmAll()
 	{
-		for(int i = 0; i<ammo.size(); i++)
-		{
+		for (int i = 0; i<ammo.size();i++){
 			ammo.get(i).move("UP");
 		}
 	}
 
-	public void cleanEmUp(Ammo am)
+	public void cleanEmUp()
 	{
-		ammo.remove(am);
+		for (int i = 0; i < ammo.size(); i++)
+			if (ammo.get(i).getY() < 0)
+				ammo.remove(i);
 	}
 
 	public List<Ammo> getList()
@@ -55,6 +55,10 @@ public class Bullets
 
 	public String toString()
 	{
-		return "";
+		String output = "";
+		for (Ammo i:ammo){
+			output += i.toString();
+		}
+		return output;
 	}
 }

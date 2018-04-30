@@ -14,14 +14,25 @@ import java.util.List;
 
 public class AlienHorde
 {
-	private List<Alien> aliens;
-	private int tick;
-	private int size;
-
+	private ArrayList<Alien> aliens;
+	private boolean left = true;
+	private boolean right = true;
+	
 	public AlienHorde(int size)
 	{
-		aliens = new ArrayList<Alien>(size);
-		this.size = size;
+		int x = 50;
+		int y = 100;
+		aliens = new ArrayList<Alien>();
+		for(int i = 0; i<size; i++)
+		{
+			aliens.add(i, new Alien(x, y, 40, 40, 1));
+			x+=100;
+			if(x>=700)
+			{
+				x=50;
+				y+=50;
+			}
+		}
 	}
 
 	public void add(Alien al)
@@ -31,40 +42,80 @@ public class AlienHorde
 
 	public void drawEmAll( Graphics window )
 	{
-		for (Alien al:aliens){
-			al.draw(window);
+		for(int i = 0; i<aliens.size(); i++)
+		{
+			aliens.get(i).draw(window);
 		}
 	}
 
 	public void moveEmAll()
 	{
-		tick++;
-		for (Alien al:aliens){
-			if (tick <= 120)
-				al.move("RIGHT");
-			else if (tick <= 320)
-				al.move("DOWN");
-			else if (tick <= 440)
-				al.move("LEFT");
-			else if (tick <= 640)
-				al.move("UP");
-			else if (tick <= 1000)
-				tick = 0;
+		int x=1;
+		for(int i = 0; i<aliens.size(); i++)
+		{
+			if(aliens.get(i).getX()>=780-aliens.get(i).getWidth() && right == true){
+				right = false;
+				left = true;
+				for(int j = 0; j<aliens.size(); j++)
+				{// extension idea: make speed of aliens faster
+					aliens.get(j).setSpeed(10);
+					aliens.get(j).move("UP");
+					aliens.get(j).setSpeed(1);
+				}
+				break;
+			}
+			else if(aliens.get(i).getX()<=1){
+				left = false;
+				right = true;
+				for(int j = 0; j<aliens.size(); j++){
+					aliens.get(j).setSpeed(10);
+					aliens.get(j).move("UP");
+					aliens.get(j).setSpeed(1);
+				}
+				break;
+			}
+
 		}
-		
+		for(int i = 0; i<aliens.size(); i++){
+			if(right == true){
+				aliens.get(i).move("RIGHT");
+			}
+			else if(left == true){
+				aliens.get(i).move("LEFT");
+			}
+		}
 	}
-	
-	public int getSize(){
-		return size;
-	}
-	
-	public void removeDeadOnes(List<Ammo> shots)
+
+	public Ammo removeDeadOnes(List<Ammo> ammo)
 	{
-		
+		for(int j = aliens.size()-1; j>=0; j--){
+			for(int i = 0; i<ammo.size(); i++){
+				if(right == true){
+					if(ammo.get(i).getX()+ammo.get(i).getWidth()+ammo.get(i).getSpeed() > aliens.get(j).getX() && ammo.get(i).getX()+ammo.get(i).getSpeed() < aliens.get(j).getX()+aliens.get(j).getWidth()
+							&& ammo.get(i).getY() <= aliens.get(j).getY()+aliens.get(j).getHeight() && ammo.get(i).getY()-ammo.get(i).getHeight() >= aliens.get(j).getY()){
+						aliens.remove(j);
+						return ammo.get(i);
+					}
+				}
+				else if(left == true){
+					if(ammo.get(i).getX()+ammo.get(i).getWidth()-ammo.get(i).getSpeed() > aliens.get(j).getX() && ammo.get(i).getX()-ammo.get(i).getSpeed() < aliens.get(j).getX()+aliens.get(j).getWidth()
+							&& ammo.get(i).getY() <= aliens.get(j).getY()+aliens.get(j).getHeight() && ammo.get(i).getY()-ammo.get(i).getHeight() >= aliens.get(j).getY()){
+						aliens.remove(j);
+						return ammo.get(i);
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	public String toString()
 	{
 		return "";
+	}
+	
+	public List<Alien> getList() 
+	{
+		return aliens;
 	}
 }
